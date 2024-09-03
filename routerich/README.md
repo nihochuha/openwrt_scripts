@@ -1,5 +1,5 @@
 # Simple scripts for OpenWRT on Routerich AX3000 
-[Русский тут](https://github.com/nihochuha/openwrt_scripts/new/main#%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-openwrt-%D0%BD%D0%B0-routerich-ax3000)
+[Русский тут](https://github.com/nihochuha/openwrt_scripts/tree/main/routerich#%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-openwrt-%D0%BD%D0%B0-routerich-ax3000)
 
 ## Leds on/off using uci
 1. Add config for leds not included in default configuration
