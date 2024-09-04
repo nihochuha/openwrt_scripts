@@ -105,7 +105,7 @@
      - navigate to System - Sheduled Tasks
      - paste two strings quoted above to the end of text input
      - press "Save"
-   
+4. You can adjust triggers used in daylight mode for your ow needs. Check [OpenWRT documentation](https://openwrt.org/docs/guide-user/base-system/led_configuration#led_triggers)   
 
 # Скрипты для OpenWRT на Routerich AX3000
 
@@ -213,3 +213,4 @@
      - откройте вкладку Система - Планировщик
      - вставьте две строчки из цитаты выше в конец текстового поля
      - нажмите "Сохранить"
+4. Если вы хотите использовать другие триггеры для включенного состояния ищите их [в документации OpenWRT на англ.](https://openwrt.org/docs/guide-user/base-system/led_configuration#led_triggers)   
