@@ -70,9 +70,11 @@
    config led
 	   option name 'Mesh_5.8'
 	   option sysfs 'blue:mesh'
-	   option trigger 'default-on'
+	   option trigger 'none'
    ```
    after saving the file run `reload_config` command in CLI.
+
+   If you just want to turn off all leds forever - that's it! You can skip next steps.
    
 2. Put [ledcontrol.sh](ledcontrol.sh) to /usr/bin/ folder of your router and make it executable
    - Download it directly from router CLI:
@@ -88,7 +90,7 @@
    ```
    chmod +x /usr/bin/ledcontrol.sh
    ```
-4. Add crontab job to turn off all leds from 11 p.m. to 8 a.m.:
+3. Add crontab job to turn off all leds from 11 p.m. to 8 a.m.:
    ```
    0 23 * * * /usr/bin/ledcontrol.sh off
    0 8 * * * /usr/bin/ledcontrol.sh on
@@ -176,9 +178,11 @@
    config led
 	   option name 'Mesh_5.8'
 	   option sysfs 'blue:mesh'
-	   option trigger 'default-on'
+	   option trigger 'none'
    ```
    после сохранения файла выполните в терминале роутера команду `reload_config`.
+
+   Если вы хотели просто отключить все лампочки и больше не хотите ими управлять, остальные шаги выполнять не нужно.
 2. Поместите [ledcontrol.sh](ledcontrol.sh) в папку /usr/bin/ вашего маршрутизатора
    - Скачайте напрямую из командной строки роутера
      ```
