@@ -3,7 +3,7 @@
 
 ## Leds on/off using uci
 1. Check your router's /etc/config/system configuration file (`nano /etc/config/system`).
-   If you're using default configuration some `config led` sections are missed, so add missing saving order sampled below. It's safe to change name and mode depending on your needs.
+   If you're using default configuration some `config led` sections are missed, so add missing saving order by `option sysfs` key from sample below. It's safe to change name depending on your needs.
    ```
    config led 'led_lan_1'
 	   option name 'lan-1'
@@ -109,7 +109,7 @@
 
 ## Вкл/выкл диодов через настройки uci
 1. Отредактируйте файл конфигурации /etc/config/system (`nano /etc/config/system`).
-   Если вы используете конфигурацию по умолчанию, набор секций `config led` у вас будет другой, добавьте недостающие скопировав их из листинга ниже. Можно менять имена, но порядок секций лучше сохранить, так как скрипт использует в работе порядковые номера.
+   Если вы используете конфигурацию по умолчанию, набор секций `config led` у вас будет другой, добавьте недостающие скопировав их из листинга ниже. Можно менять имена, но порядок секций (по значению `option sysfs`) лучше сохранить, так как скрипт использует в работе порядковые номера.
    ```
    config led 'led_lan_1'
 	   option name 'lan-1'
