@@ -2,32 +2,79 @@
 [Русский тут](https://github.com/nihochuha/openwrt_scripts/tree/main/routerich#%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-openwrt-%D0%BD%D0%B0-routerich-ax3000)
 
 ## Leds on/off using uci
-1. Add config for leds not included in default configuration
+1. Check your router's /etc/config/system configuration file (`nano /etc/config/system`).
+   If you're using default configuration some `config led` sections are missed, so add missing saving order sampled below. It's safe to change name and mode depending on your needs.
    ```
-   uci set system.@led[5]=led
-   uci set system.@led[5].name='Power'
-   uci set system.@led[5].sysfs='blue:power'
-   uci set system.@led[5].trigger='heartbeat'
-   uci set system.@led[6]=led
-   uci set system.@led[6].name='Red_WiFi5'
-   uci set system.@led[6].sysfs='red:wlan-50'
-   uci set system.@led[6].trigger='netdev'
-   uci set system.@led[6].dev='phy1-ap0'
-   uci set system.@led[6].mode='tx'
-   uci add_list system.@led[6].mode='rx'
-   uci set system.@led[7]=led
-   uci set system.@led[7].name='Blue_WiFi4'
-   uci set system.@led[7].sysfs='blue:wlan-24'
-   uci set system.@led[7].trigger='netdev'
-   uci set system.@led[7].dev='phy0-ap0'
-   uci set system.@led[7].mode='tx'
-   uci add_list system.@led[7].mode='rx'
-   uci set system.@led[8]=led
-   uci set system.@led[8].name='Mesh_5.8'
-   uci set system.@led[8].sysfs='blue:mesh'
-   uci set system.@led[8].trigger='default-on'
+   config led 'led_lan_1'
+	   option name 'lan-1'
+	   option sysfs 'blue:lan-1'
+	   option trigger 'none'
+	   option dev 'lan1'
+	   list mode 'link'
+	   list mode 'tx'
+	   list mode 'rx'
+   
+   config led 'led_lan_2'
+	   option name 'lan-2'
+	   option sysfs 'blue:lan-2'
+	   option trigger 'none'
+	   option dev 'lan2'
+	   list mode 'link'
+	   list mode 'tx'
+	   list mode 'rx'
+   
+   config led 'led_lan_3'
+	   option name 'lan-3'
+	   option sysfs 'blue:lan-3'
+	   option trigger 'none'
+	   option dev 'lan3'
+	   list mode 'link'
+	   list mode 'tx'
+	   list mode 'rx'
+   
+   config led 'led_wan'
+	   option name 'wan'
+	   option sysfs 'blue:wan'
+	   option trigger 'none'
+	   option dev 'wan'
+	   list mode 'link'
+
+   config led 'led_wan_off'
+	   option name 'wan-off'
+	   option sysfs 'red:wan'
+	   option trigger 'netdev'
+	   option mode 'link'
+	   option dev 'wan'
+   
+   config led
+	   option name 'Power'
+	   option sysfs 'blue:power'
+	   option trigger 'none'
+   
+   config led
+	   option name 'Red_WiFi5'
+	   option sysfs 'red:wlan-50'
+	   option trigger 'none'
+	   option dev 'phy1-ap0'
+	   list mode 'tx'
+	   list mode 'rx'
+   
+   config led
+	   option name 'Blue_WiFi4'
+	   option sysfs 'blue:wlan-24'
+	   option trigger 'none'
+	   option dev 'phy0-ap0'
+	   list mode 'tx'
+	   list mode 'rx'
+   
+   config led
+	   option name 'Mesh_5.8'
+	   option sysfs 'blue:mesh'
+	   option trigger 'default-on'
    ```
-3. Put [ledcontrol.sh](ledcontrol.sh) to /usr/bin/ folder of your router and make it executable
+   after saving the file run `reload_config` command in CLI.
+   
+2. Put [ledcontrol.sh](ledcontrol.sh) to /usr/bin/ folder of your router and make it executable
    - Download it directly from router CLI:
      ```
      wget https://github.com/nihochuha/openwrt_scripts/raw/main/routerich/ledcontrol.sh -O /usr/bin/ledcontrol.sh
@@ -61,32 +108,78 @@
 # Скрипты для OpenWRT на Routerich AX3000
 
 ## Вкл/выкл диодов через настройки uci
-1. Добавьте диоды, не настроенные по умолчанию
+1. Отредактируйте файл конфигурации /etc/config/system (`nano /etc/config/system`).
+   Если вы используете конфигурацию по умолчанию, набор секций `config led` у вас будет другой, добавьте недостающие скопировав их из листинга ниже. Можно менять имена, но порядок секций лучше сохранить, так как скрипт использует в работе порядковые номера.
    ```
-   uci set system.@led[5]=led
-   uci set system.@led[5].name='Power'
-   uci set system.@led[5].sysfs='blue:power'
-   uci set system.@led[5].trigger='heartbeat'
-   uci set system.@led[6]=led
-   uci set system.@led[6].name='Red_WiFi5'
-   uci set system.@led[6].sysfs='red:wlan-50'
-   uci set system.@led[6].trigger='netdev'
-   uci set system.@led[6].dev='phy1-ap0'
-   uci set system.@led[6].mode='tx'
-   uci add_list system.@led[6].mode='rx'
-   uci set system.@led[7]=led
-   uci set system.@led[7].name='Blue_WiFi4'
-   uci set system.@led[7].sysfs='blue:wlan-24'
-   uci set system.@led[7].trigger='netdev'
-   uci set system.@led[7].dev='phy0-ap0'
-   uci set system.@led[7].mode='tx'
-   uci add_list system.@led[7].mode='rx'
-   uci set system.@led[8]=led
-   uci set system.@led[8].name='Mesh_5.8'
-   uci set system.@led[8].sysfs='blue:mesh'
-   uci set system.@led[8].trigger='default-on'
+   config led 'led_lan_1'
+	   option name 'lan-1'
+	   option sysfs 'blue:lan-1'
+	   option trigger 'none'
+	   option dev 'lan1'
+	   list mode 'link'
+	   list mode 'tx'
+	   list mode 'rx'
+   
+   config led 'led_lan_2'
+	   option name 'lan-2'
+	   option sysfs 'blue:lan-2'
+	   option trigger 'none'
+	   option dev 'lan2'
+	   list mode 'link'
+	   list mode 'tx'
+	   list mode 'rx'
+   
+   config led 'led_lan_3'
+	   option name 'lan-3'
+	   option sysfs 'blue:lan-3'
+	   option trigger 'none'
+	   option dev 'lan3'
+	   list mode 'link'
+	   list mode 'tx'
+	   list mode 'rx'
+   
+   config led 'led_wan'
+	   option name 'wan'
+	   option sysfs 'blue:wan'
+	   option trigger 'none'
+	   option dev 'wan'
+	   list mode 'link'
+
+   config led 'led_wan_off'
+	   option name 'wan-off'
+	   option sysfs 'red:wan'
+	   option trigger 'netdev'
+	   option mode 'link'
+	   option dev 'wan'
+   
+   config led
+	   option name 'Power'
+	   option sysfs 'blue:power'
+	   option trigger 'none'
+   
+   config led
+	   option name 'Red_WiFi5'
+	   option sysfs 'red:wlan-50'
+	   option trigger 'none'
+	   option dev 'phy1-ap0'
+	   list mode 'tx'
+	   list mode 'rx'
+   
+   config led
+	   option name 'Blue_WiFi4'
+	   option sysfs 'blue:wlan-24'
+	   option trigger 'none'
+	   option dev 'phy0-ap0'
+	   list mode 'tx'
+	   list mode 'rx'
+   
+   config led
+	   option name 'Mesh_5.8'
+	   option sysfs 'blue:mesh'
+	   option trigger 'default-on'
    ```
-3. Поместите [ledcontrol.sh](ledcontrol.sh) в папку /usr/bin/ вашего маршрутизатора
+   после сохранения файла выполните в терминале роутера команду `reload_config`.
+2. Поместите [ledcontrol.sh](ledcontrol.sh) в папку /usr/bin/ вашего маршрутизатора
    - Скачайте напрямую из командной строки роутера
      ```
      wget https://github.com/nihochuha/openwrt_scripts/raw/main/routerich/ledcontrol.sh -O /usr/bin/ledcontrol.sh
@@ -100,7 +193,7 @@
    ```
    chmod +x /usr/bin/ledcontrol.sh
    ```
-4. Добавьте в планировщик задач команды для выключения диодов с 23:00 до 8 утра:
+3. Добавьте в планировщик задач команды для выключения диодов с 23:00 до 8 утра:
    ```
    0 23 * * * /usr/bin/ledcontrol.sh off
    0 8 * * * /usr/bin/ledcontrol.sh on
