@@ -1,6 +1,10 @@
 # Simple scripts for OpenWRT on Routerich AX3000 
-[Русский тут](https://github.com/nihochuha/openwrt_scripts/tree/main/routerich#%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-openwrt-%D0%BD%D0%B0-routerich-ax3000)
+[:ru:Русский тут](https://github.com/nihochuha/openwrt_scripts/tree/main/routerich#%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-openwrt-%D0%BD%D0%B0-routerich-ax3000)
 
+### Prerequisites
+I assume that you have an understanding of the linux file system structure (OpenWRT), can connect to the router via SSH, know how to use basic command line commands, know how to read the output of these commands and use internet search if the output is different than expected.
+
+I use **nano** as a text editor. You can install it directly on your router with `opkg update && opkg install nano-full` or use any other one you like.
 ## Leds on/off using uci
 1. Check your router's /etc/config/system configuration file (`nano /etc/config/system`).
    If you're using default configuration some `config led` sections are missed, so add missing saving order by `option sysfs` key from sample below. It's safe to change name depending on your needs.
@@ -109,6 +113,10 @@
 
 # Скрипты для OpenWRT на Routerich AX3000
 
+### Прежде чем вы начнёте
+Я подразумеваю, что вы имеете представление о структуре файловой системы linux (OpenWRT), можете подключиться к своему маршрутизатору по протоколу SSH, знаете как использовать базовые команды командной строки, умеете читать вывод этих команд и использовать поиск в интернете если вывод отличается от ожидаемого.
+
+В качестве текстового редактора я использую **nano**. Вы можете доустановить его прямо на свой маршрутизатор с помощью команды `opkg update && opkg install nano-full` или использовать любой другой из удобных вам.
 ## Вкл/выкл диодов через настройки uci
 1. Отредактируйте файл конфигурации /etc/config/system (`nano /etc/config/system`).
    Если вы используете конфигурацию по умолчанию, набор секций `config led` у вас будет другой, добавьте недостающие скопировав их из листинга ниже. Можно менять имена, но порядок секций (по значению `option sysfs`) лучше сохранить, так как скрипт использует в работе порядковые номера.
